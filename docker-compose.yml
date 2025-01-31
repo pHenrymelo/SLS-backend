@@ -1,0 +1,31 @@
+
+services:
+
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
+    
+    ports:
+      - '5432:5432'
+
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=SLDB
+
+    volumes:
+      - polls_pg_data:/bitnami/postgresql
+
+  app:
+      build: .
+      ports:
+        - "4130:4130"
+      volumes:
+        - .:/usr/app
+      environment:
+        - DATABASE_URL=postgresql://docker:docker@postgresql:5432/SLDB?schema=public
+      depends_on:
+        - postgresql
+      command: pnpm start
+
+volumes:
+  polls_pg_data:
