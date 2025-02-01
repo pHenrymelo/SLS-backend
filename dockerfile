@@ -9,8 +9,6 @@ RUN pnpm install
 
 COPY . .
 
-RUN npx prisma migrate deploy
-
 EXPOSE 4130
 
-CMD [ "pnpm", "start" ]
+CMD [ "sh", "-c", "pnpm prisma migrate deploy && pnpm start"]
