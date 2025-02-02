@@ -16,7 +16,10 @@ services:
       - polls_pg_data:/bitnami/postgresql
 
   app:
-      build: .
+      build: 
+        context: .
+        dockerfile: Dockerfile
+        target: develop
       ports:
         - "4130:4130"
       volumes:
@@ -25,7 +28,6 @@ services:
         - DATABASE_URL=postgresql://docker:docker@db:5432/SLDB?schema=public
       depends_on:
         - db
-      target: develop
       command: pnpm start
 
 volumes:
