@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:18-alpine as develop
 
 RUN npm install -g pnpm
 
@@ -9,6 +9,6 @@ RUN pnpm install
 
 COPY . .
 
-EXPOSE 4130
+EXPOSE 4130 
 
-CMD [ "sh", "-c", "pnpm prisma migrate deploy && pnpm start"]
+RUN pnpm migrate

@@ -25,6 +25,7 @@ services:
         - DATABASE_URL=postgresql://docker:docker@db:5432/SLDB?schema=public
       depends_on:
         - db
+      target: develop
       command: pnpm start
 
 volumes:
