@@ -5,10 +5,10 @@ RUN npm install -g pnpm
 WORKDIR /usr/app
 
 COPY package*.json ./
-RUN pnpm install
 
 COPY . .
+RUN pnpm install
 
 EXPOSE 4130 
 
-RUN pnpm migrate
+CMD [ "sh", "-c", "pnpm migrate" "&&" "pnpm start" ]
