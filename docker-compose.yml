@@ -16,19 +16,21 @@ services:
       - polls_pg_data:/bitnami/postgresql
 
   app:
+      image: Kaiser/node
       build: 
         context: .
         dockerfile: Dockerfile
         target: develop
       ports:
         - "4130:4130"
+        - "5555:5555"
       volumes:
         - .:/usr/app
+        - /usr/app/node_modules
       environment:
         - DATABASE_URL=postgresql://docker:docker@db:5432/SLDB?schema=public
       depends_on:
         - db
-      command: pnpm start
 
 volumes:
   polls_pg_data:

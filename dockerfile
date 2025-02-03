@@ -7,8 +7,9 @@ WORKDIR /usr/app
 COPY package*.json ./
 
 COPY . .
+
 RUN pnpm install
 
 EXPOSE 4130 
 
-CMD [ "sh", "-c", "pnpm migrate" "&&" "pnpm start" ]
+CMD [ "sh", "-c", "pnpm migrate && pnpm start" ]
